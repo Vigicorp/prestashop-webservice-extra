@@ -257,7 +257,7 @@ class PrestaShopWebservice
         if ($response != '') {
             libxml_clear_errors();
             libxml_use_internal_errors(true);
-            $xml = simplexml_load_string(trim($response), 'SimpleXMLElement', LIBXML_NOCDATA);
+            $xml = simplexml_load_string(trim(iconv('UTF-8', 'UTF-8//IGNORE', $response)), 'SimpleXMLElement', LIBXML_NOCDATA);
             if (libxml_get_errors()) {
                 $msg = var_export(libxml_get_errors(), true);
                 libxml_clear_errors();
