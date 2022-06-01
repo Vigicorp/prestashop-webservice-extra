@@ -300,7 +300,7 @@ class PrestaShopWebservice
         $request = $this->executeRequest($url, array(CURLOPT_CUSTOMREQUEST => 'POST', CURLOPT_POSTFIELDS => $xml));
 
         $this->checkStatusCode($request['status_code']);
-        return $this->parseXML($request['response']);
+        return str_contains($url, 'images') ? $request['response'] : $this->parseXML($request['response']);;
     }
 
     /**
