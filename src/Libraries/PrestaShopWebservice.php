@@ -256,7 +256,7 @@ class PrestaShopWebservice
      * @return SimpleXMLElement status_code, response
      * @throws PrestaShopWebserviceException
      */
-    public function add($options)
+    public function add($options, $parseXml = true)
     {
         $xml = '';
 
@@ -275,7 +275,7 @@ class PrestaShopWebservice
         $request = $this->executeRequest($url, array(CURLOPT_CUSTOMREQUEST => 'POST', CURLOPT_POSTFIELDS => $xml));
 
         $this->checkStatusCode($request['status_code'], 'add', $url, $request);
-        return str_contains($url, 'images') ? $request['response'] : $this->parseXML($request['response']);;
+        return $parseXml ? $this->parseXML($request['response']) : $request['response'];
     }
 
     /**
